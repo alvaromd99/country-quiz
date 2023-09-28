@@ -23,6 +23,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	padding-top: 30px;
 }
 
 h1 {
@@ -42,7 +43,7 @@ h1 {
 	width: 110px;
 	height: 54px;
 	position: relative;
-	top: 90px;
+	top: 80px;
 	left: 142px;
 	background-color: var(--selected-color);
 	color: var(--bg-color);

@@ -74,3 +74,10 @@
 .question.correct .icon {
 	opacity: 1;
 }
+
+/* Estilos específicos para FlagQuestion */
+.questions-cont .flag {
+	font-size: 40px;
+	position: absolute;
+	top: -64px;
+}

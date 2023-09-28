@@ -1,9 +1,10 @@
 import './App.css'
 import GlobeSvg from '../country-quiz-master/undraw_adventure_4hum 1.svg'
 import { useEffect, useState } from 'react'
-import { Country, QuestionValues } from './types/types'
-import CapitalQuestion from './components/CapitalQuestion'
+import { Country, QuestionType, QuestionValues } from './types/types'
 import { fetchCountries, getRandomUniqueIndexes } from './services'
+import CapitalQuestion from './components/CapitalQuestion'
+import FlagQuestion from './components/FlagQuestion'
 
 function App() {
 	const [countries, setCountries] = useState<Country[]>([])
@@ -16,6 +17,7 @@ function App() {
 		wrongAnswers: [],
 	})
 	const [isAnswerCorrect, setIsAnswerCorrect] = useState<boolean>(false)
+	const [questionType, setQuestionType] = useState<QuestionType>('flag')
 
 	// Función para manejar la respuesta correcta
 	const handleAnswerCorrect = () => {
@@ -54,11 +56,18 @@ function App() {
 			<h1>COUNTRY QUIZ</h1>
 			<img className='globe' src={GlobeSvg} alt='Person and globe svg' />
 			<div className='quiz-cont'>
-				<CapitalQuestion
-					values={questionValues}
-					setIsAnswerCorrect={handleAnswerCorrect}
-				/>
-
+				{questionType === 'capital' && (
+					<CapitalQuestion
+						values={questionValues}
+						setIsAnswerCorrect={handleAnswerCorrect}
+					/>
+				)}
+				{questionType === 'flag' && (
+					<FlagQuestion
+						values={questionValues}
+						setIsAnswerCorrect={handleAnswerCorrect}
+					/>
+				)}
 				{isAnswerCorrect && (
 					<button
 						className='next-btn'

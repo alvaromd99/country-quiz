@@ -21,3 +21,5 @@ export interface QuestionValues {
 	flag: string
 	wrongAnswers: string[]
 }
+
+export type QuestionType = 'capital' | 'flag'
