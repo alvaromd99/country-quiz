@@ -1,5 +1,6 @@
 import '../styles/Questions.css'
-import { QuestionValues } from '../types'
+import { QuestionValues } from '../types/types'
+import { reArrangeArray } from '../services/shuffleArray'
 
 interface CapitalQuestionProps {
 	values: QuestionValues
@@ -7,16 +8,6 @@ interface CapitalQuestionProps {
 
 export default function CapitalQuestion({ values }: CapitalQuestionProps) {
 	const names: string[] = [...values.wrongAnswers, values.name]
-
-	const reArrangeArray = (array: string[]) => {
-		// Función de comparación aleatoria
-		const randomComparator = () => Math.random() - 0.5
-
-		// Utiliza la función de comparación para ordenar el array aleatoriamente
-		const shuffledArray = [...array].sort(randomComparator)
-
-		return shuffledArray
-	}
 
 	const shuffledArray: string[] = reArrangeArray(names)
 

@@ -1,7 +1,7 @@
 import './App.css'
 import GlobeSvg from '../country-quiz-master/undraw_adventure_4hum 1.svg'
 import { useEffect, useState } from 'react'
-import { Country, QuestionValues } from './types'
+import { Country, QuestionValues } from './types/types'
 import CapitalQuestion from './components/CapitalQuestion'
 
 // API CALL -> https://restcountries.com/v3.1/all?fields=name,capital,flag
