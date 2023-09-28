@@ -1,36 +1,57 @@
 import '../styles/Questions.css'
 import { QuestionValues } from '../types/types'
 import { reArrangeArray } from '../services/shuffleArray'
+import { useEffect, useState } from 'react'
+import correct from '../assets/correct.svg'
 
 interface CapitalQuestionProps {
 	values: QuestionValues
+	setIsAnswerCorrect: (correct: boolean) => void
 }
 
-export default function CapitalQuestion({ values }: CapitalQuestionProps) {
-	const names: string[] = [...values.wrongAnswers, values.name]
+export default function CapitalQuestion({
+	values,
+	setIsAnswerCorrect,
+}: CapitalQuestionProps) {
+	const { capital, name, wrongAnswers } = values
+	const [shuffledArray, setShuffledArray] = useState<string[]>([])
+	const [answer, setAnswer] = useState<string | null>(null)
 
-	const shuffledArray: string[] = reArrangeArray(names)
+	useEffect(() => {
+		const names: string[] = [...wrongAnswers, name]
+		const shuffleArr: string[] = reArrangeArray(names)
+		setShuffledArray(shuffleArr)
+	}, [name, wrongAnswers])
+
+	const handleClick = (selectedAnswer: string) => {
+		setAnswer(selectedAnswer)
+
+		if (selectedAnswer === name) {
+			setIsAnswerCorrect(true)
+		}
+	}
 
 	return (
 		<div className='questions-cont'>
-			<h2>{values.capital} is the capital of</h2>
+			<h2>{capital} is the capital of</h2>
 			<div className='answers-cont'>
-				<div className='question one'>
-					<p>A</p>
-					<p>{shuffledArray[0]}</p>
-				</div>
-				<div className='question second'>
-					<p>B</p>
-					<p>{shuffledArray[1]}</p>
-				</div>
-				<div className='question third'>
-					<p>C</p>
-					<p>{shuffledArray[2]}</p>
-				</div>
-				<div className='question fourth'>
-					<p>D</p>
-					<p>{shuffledArray[3]}</p>
-				</div>
+				{shuffledArray.map((option, index) => {
+					const isSelected = option === answer
+					const isCorrect = isSelected && option === name
+					const btnClass = `question ${
+						isSelected ? (isCorrect ? 'correct' : 'incorrect') : ''
+					}`
+					return (
+						<button
+							key={index}
+							className={btnClass}
+							onClick={() => handleClick(option)}>
+							<p>{String.fromCharCode(65 + index)}</p>
+							<p>{option}</p>
+							<img className='icon' src={correct} alt='Correct icon' />
+						</button>
+					)
+				})}
 			</div>
 		</div>
 	)

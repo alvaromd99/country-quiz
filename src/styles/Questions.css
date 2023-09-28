@@ -2,7 +2,7 @@
 	height: 300px;
 	width: 400px;
 	position: relative;
-	top: -40px;
+	top: 50px;
 }
 
 .questions-cont h2 {
@@ -19,12 +19,14 @@
 }
 
 .answers-cont .question {
+	background-color: var(--bg-color);
+	color: var(--letter-color);
 	border: 2px solid var(--letter-color);
 	height: 46px;
 	display: flex;
 	align-items: center;
 	font-size: 18px;
-	padding: 20px;
+	padding-left: 20px;
 	border-radius: 8px;
 	gap: 30px;
 }
@@ -33,4 +35,35 @@
 	background-color: var(--selected-color);
 	border-color: var(--selected-color);
 	color: var(--bg-color);
+}
+
+.answers-cont .selected.correct {
+	background-color: var(--correct-color);
+	border-color: var(--correct-color);
+	color: var(--bg-color);
+}
+
+.answers-cont .correct {
+	background-color: var(--correct-color);
+	border-color: var(--correct-color);
+	color: var(--bg-color);
+}
+
+.answers-cont .incorrect {
+	background-color: var(--wrong-color);
+	border-color: var(--wrong-color);
+	color: var(--bg-color);
+}
+
+.question .icon {
+	opacity: 0;
+	transition: all;
+}
+
+.question.incorrect .icon {
+	opacity: 1;
+}
+
+.question.correct .icon {
+	opacity: 1;
 }

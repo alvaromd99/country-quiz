@@ -21,9 +21,8 @@
 	background-color: white;
 	border-radius: 10px;
 	display: flex;
+	flex-direction: column;
 	align-items: center;
-	justify-content: center;
-	color: var(--letter-color);
 }
 
 h1 {
@@ -33,8 +32,22 @@ h1 {
 	font-weight: bold;
 }
 
-img {
+.globe {
 	position: absolute;
 	top: 40px;
 	right: 454px;
+}
+
+.quiz-cont .next-btn {
+	width: 110px;
+	height: 54px;
+	position: relative;
+	top: 90px;
+	left: 142px;
+	background-color: var(--selected-color);
+	color: var(--bg-color);
+	border: none;
+	border-radius: 12px;
+	font-size: 20px;
+	font-weight: bold;
 }

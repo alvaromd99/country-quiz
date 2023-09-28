@@ -15,6 +15,12 @@ function App() {
 		flag: '',
 		wrongAnswers: [],
 	})
+	const [isAnswerCorrect, setIsAnswerCorrect] = useState<boolean>(false)
+
+	// Función para manejar la respuesta correcta
+	const handleAnswerCorrect = () => {
+		setIsAnswerCorrect(true)
+	}
 
 	useEffect(() => {
 		if (!isDataFetched) {
@@ -43,15 +49,26 @@ function App() {
 		setIsNeedNewData(false)
 	}, [countries, isNeedNewData])
 
-	console.log(countries)
-	console.log(questionValues)
-
 	return (
 		<div className='App'>
 			<h1>COUNTRY QUIZ</h1>
 			<img className='globe' src={GlobeSvg} alt='Person and globe svg' />
 			<div className='quiz-cont'>
-				<CapitalQuestion values={questionValues} />
+				<CapitalQuestion
+					values={questionValues}
+					setIsAnswerCorrect={handleAnswerCorrect}
+				/>
+
+				{isAnswerCorrect && (
+					<button
+						className='next-btn'
+						onClick={() => {
+							setIsNeedNewData(true)
+							setIsAnswerCorrect(false)
+						}}>
+						Next
+					</button>
+				)}
 			</div>
 		</div>
 	)
