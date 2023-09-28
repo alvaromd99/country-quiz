@@ -3,8 +3,7 @@ import GlobeSvg from '../country-quiz-master/undraw_adventure_4hum 1.svg'
 import { useEffect, useState } from 'react'
 import { Country, QuestionValues } from './types/types'
 import CapitalQuestion from './components/CapitalQuestion'
-
-// API CALL -> https://restcountries.com/v3.1/all?fields=name,capital,flag
+import { fetchCountries, getRandomUniqueIndexes } from './services'
 
 function App() {
 	const [countries, setCountries] = useState<Country[]>([])
@@ -19,13 +18,7 @@ function App() {
 
 	useEffect(() => {
 		if (!isDataFetched) {
-			fetch('https://restcountries.com/v3.1/all?fields=name,capital,flag')
-				.then((res) => {
-					if (!res.ok) {
-						throw new Error('Failed to fetch countries')
-					}
-					return res.json()
-				})
+			fetchCountries()
 				.then((data) => {
 					setCountries(data)
 					setIsDataFetched(true)
@@ -49,18 +42,6 @@ function App() {
 		}
 		setIsNeedNewData(false)
 	}, [countries, isNeedNewData])
-
-	function getRandomUniqueIndexes(count: number, max: number) {
-		const indexes: number[] = []
-
-		while (indexes.length < count) {
-			const randomIndex = Math.floor(Math.random() * max)
-			if (!indexes.includes(randomIndex)) {
-				indexes.push(randomIndex)
-			}
-		}
-		return indexes
-	}
 
 	console.log(countries)
 	console.log(questionValues)
