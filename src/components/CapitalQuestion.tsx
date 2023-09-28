@@ -2,7 +2,8 @@ import '../styles/Questions.css'
 import { QuestionValues } from '../types/types'
 import { reArrangeArray } from '../services/shuffleArray'
 import { useEffect, useState } from 'react'
-import correct from '../assets/correct.svg'
+import correctIcon from '../assets/correctIcon.svg'
+import incorrectIcon from '../assets/incorrectIcon.svg'
 
 interface CapitalQuestionProps {
 	values: QuestionValues
@@ -38,6 +39,7 @@ export default function CapitalQuestion({
 				{shuffledArray.map((option, index) => {
 					const isSelected = option === answer
 					const isCorrect = isSelected && option === name
+					const imgSrc = isCorrect ? correctIcon : incorrectIcon
 					const btnClass = `question ${
 						isSelected ? (isCorrect ? 'correct' : 'incorrect') : ''
 					}`
@@ -46,9 +48,11 @@ export default function CapitalQuestion({
 							key={index}
 							className={btnClass}
 							onClick={() => handleClick(option)}>
-							<p>{String.fromCharCode(65 + index)}</p>
-							<p>{option}</p>
-							<img className='icon' src={correct} alt='Correct icon' />
+							<div className='btn-text'>
+								<p>{String.fromCharCode(65 + index)}</p>
+								<p>{option}</p>
+							</div>
+							<img className='icon' src={imgSrc} alt='Correct icon' />
 						</button>
 					)
 				})}

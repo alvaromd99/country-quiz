@@ -25,10 +25,10 @@
 	height: 46px;
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 	font-size: 18px;
-	padding-left: 20px;
 	border-radius: 8px;
-	gap: 30px;
+	padding: 0px 6px 0px 10px;
 }
 
 .answers-cont .question:hover {
@@ -53,6 +53,13 @@
 	background-color: var(--wrong-color);
 	border-color: var(--wrong-color);
 	color: var(--bg-color);
+}
+
+.question .btn-text {
+	height: 100%;
+	display: flex;
+	align-items: center;
+	gap: 20px;
 }
 
 .question .icon {
