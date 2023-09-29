@@ -8,15 +8,15 @@ import incorrectIcon from '../assets/incorrectIcon.svg'
 interface CapitalQuestionProps {
 	values: QuestionValues
 	setIsAnswerCorrect: (correct: boolean) => void
+	questionType: string
 }
 
-// TODO Remove this component and update the CapitalQuestion component
-
-export default function FlagQuestion({
+export default function Question({
 	values,
 	setIsAnswerCorrect,
+	questionType,
 }: CapitalQuestionProps) {
-	const { flag, name, wrongAnswers } = values
+	const { capital, flag, name, wrongAnswers } = values
 	const [shuffledArray, setShuffledArray] = useState<string[]>([])
 	const [answer, setAnswer] = useState<string | null>(null)
 
@@ -36,8 +36,14 @@ export default function FlagQuestion({
 
 	return (
 		<div className='questions-cont'>
-			<span className='flag'>{flag}</span>
-			<h2>Which country does this flag belongs to</h2>
+			{questionType === 'flag' && (
+				<>
+					<span className='flag'>{flag}</span>
+					<h2>Which country does this flag belongs to</h2>
+				</>
+			)}
+			{questionType === 'capital' && <h2>{capital} is the capital of</h2>}
+
 			<div className='answers-cont'>
 				{shuffledArray.map((option, index) => {
 					const isSelected = option === answer
