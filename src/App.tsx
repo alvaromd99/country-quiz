@@ -4,6 +4,9 @@ import { useEffect, useState } from 'react'
 import { Country, QuestionType, QuestionValues } from './types/types'
 import { fetchCountries, getRandomUniqueIndexes } from './services'
 import Question from './components/Question'
+import Footer from './components/Footer'
+
+// TODO Add a correct answer counter
 
 function App() {
 	const [countries, setCountries] = useState<Country[]>([])
@@ -78,6 +81,7 @@ function App() {
 					</button>
 				)}
 			</div>
+			<Footer />
 		</div>
 	)
 }

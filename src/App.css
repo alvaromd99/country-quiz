@@ -17,7 +17,7 @@
 
 .quiz-cont {
 	width: 460px;
-	min-height: 500px;
+	min-height: 480px;
 	background-color: white;
 	border-radius: 10px;
 	display: flex;
@@ -35,7 +35,7 @@ h1 {
 
 .globe {
 	position: absolute;
-	top: 40px;
+	top: 50px;
 	right: 454px;
 }
 
@@ -43,7 +43,7 @@ h1 {
 	width: 110px;
 	height: 54px;
 	position: relative;
-	top: 80px;
+	top: 70px;
 	left: 142px;
 	background-color: var(--selected-color);
 	color: var(--bg-color);
