@@ -2,20 +2,21 @@ import '../styles/Questions.css'
 import { QuestionValues } from '../types/types'
 import { reArrangeArray } from '../services/shuffleArray'
 import { useEffect, useState } from 'react'
-import correctIcon from '../assets/correctIcon.svg'
-import incorrectIcon from '../assets/incorrectIcon.svg'
+import Answer from './Answer'
 
 interface CapitalQuestionProps {
 	values: QuestionValues
 	setIsAnswerCorrect: (correct: boolean) => void
 	questionType: string
-	setCorrectCounter: (counter: number) => void
+	correctCounter: number
+	setCorrectCounter: (correctCounter: number) => void
 }
 
 export default function Question({
 	values,
 	setIsAnswerCorrect,
 	questionType,
+	correctCounter,
 	setCorrectCounter,
 }: CapitalQuestionProps) {
 	const { capital, flag, name, wrongAnswers } = values
@@ -33,9 +34,11 @@ export default function Question({
 
 		if (selectedAnswer === name) {
 			setIsAnswerCorrect(true)
+			setCorrectCounter(correctCounter + 1)
 		} else {
 			setCorrectCounter(0)
 		}
+		console.log('Contador' + correctCounter)
 	}
 
 	return (
@@ -50,23 +53,14 @@ export default function Question({
 
 			<div className='answers-cont'>
 				{shuffledArray.map((option, index) => {
-					const isSelected = option === answer
-					const isCorrect = isSelected && option === name
-					const imgSrc = isCorrect ? correctIcon : incorrectIcon
-					const btnClass = `question ${
-						isSelected ? (isCorrect ? 'correct' : 'incorrect') : ''
-					}`
 					return (
-						<button
-							key={index}
-							className={btnClass}
-							onClick={() => handleClick(option)}>
-							<div className='btn-text'>
-								<p>{String.fromCharCode(65 + index)}</p>
-								<p>{option}</p>
-							</div>
-							<img className='icon' src={imgSrc} alt='Correct icon' />
-						</button>
+						<Answer
+							option={option}
+							answer={answer}
+							name={name}
+							index={index}
+							handleClick={handleClick}
+						/>
 					)
 				})}
 			</div>

@@ -5,6 +5,7 @@ import { Country, QuestionType, QuestionValues } from './types/types'
 import { fetchCountries, getRandomUniqueIndexes } from './services'
 import Question from './components/Question'
 import Footer from './components/Footer'
+import Switch from './components/Switch'
 
 // TODO Add a correct answer counter
 
@@ -12,15 +13,15 @@ function App() {
 	const [countries, setCountries] = useState<Country[]>([])
 	const [isDataFetched, setIsDataFetched] = useState<boolean>(false)
 	const [isNeedNewData, setIsNeedNewData] = useState<boolean>(false)
+	const [isAnswerCorrect, setIsAnswerCorrect] = useState<boolean>(false)
+	const [questionType, setQuestionType] = useState<QuestionType>('capital')
+	const [correctCounter, setCorrectCounter] = useState<number>(0)
 	const [questionValues, setQuestionValues] = useState<QuestionValues>({
 		name: '',
 		capital: '',
 		flag: '',
 		wrongAnswers: [],
 	})
-	const [isAnswerCorrect, setIsAnswerCorrect] = useState<boolean>(false)
-	const [questionType, setQuestionType] = useState<QuestionType>('capital')
-	const [correctCounter, setCorrectCounter] = useState<number>(0)
 
 	// Función para manejar la respuesta correcta
 	const handleAnswerCorrect = () => {
@@ -54,6 +55,12 @@ function App() {
 		setIsNeedNewData(false)
 	}, [countries, isNeedNewData])
 
+	const resetGame = () => {
+		setIsNeedNewData(true)
+		setIsAnswerCorrect(false)
+		setCorrectCounter(0)
+	}
+
 	return (
 		<div className='App'>
 			<h1>COUNTRY QUIZ</h1>
@@ -63,6 +70,7 @@ function App() {
 					values={questionValues}
 					setIsAnswerCorrect={handleAnswerCorrect}
 					questionType={questionType}
+					correctCounter={correctCounter}
 					setCorrectCounter={setCorrectCounter}
 				/>
 
@@ -82,25 +90,14 @@ function App() {
 						Next
 					</button>
 				)}
-				<div className='switch-container'>
-					<h2>Questions type</h2>
-					<div className='label-container'>
-						<label htmlFor='capital-btn' className='switch'>
-							<input type='checkbox' id='capital-btn' />
-							<span className='slider'></span>
-						</label>
-						<p>Capital Questions</p>
-					</div>
-					<div className='label-container'>
-						<label htmlFor='flag-btn' className='switch'>
-							<input type='checkbox' id='flag-btn' />
-							<span className='slider'></span>
-						</label>
-						<p>Flag Questions</p>
-					</div>
-				</div>
+				<Switch />
 			</div>
-			{correctCounter === 5 && <h3>Has ganado!!</h3>}
+			{correctCounter >= 3 && (
+				<>
+					<h3>Has ganado!!</h3>
+					<button onClick={resetGame}>Try again</button>
+				</>
+			)}
 			<Footer />
 		</div>
 	)
