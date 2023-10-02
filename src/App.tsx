@@ -1,7 +1,12 @@
 import './App.css'
 import GlobeSvg from '../country-quiz-master/undraw_adventure_4hum 1.svg'
 import { useEffect, useState } from 'react'
-import { Country, QuestionType, QuestionValues } from './types/types'
+import {
+	Country,
+	QuestionType,
+	QuestionValues,
+	GlobalQuestionType,
+} from './types/types'
 import { fetchCountries, getRandomUniqueIndexes } from './services'
 import Question from './components/Question'
 import Footer from './components/Footer'
@@ -20,6 +25,8 @@ function App() {
 	})
 	const [isAnswerCorrect, setIsAnswerCorrect] = useState<boolean>(false)
 	const [questionType, setQuestionType] = useState<QuestionType>('capital')
+	const [globalQuestionType, setGlobalQuestionType] =
+		useState<GlobalQuestionType>(null)
 
 	// Función para manejar la respuesta correcta
 	const handleAnswerCorrect = () => {
@@ -80,6 +87,23 @@ function App() {
 						Next
 					</button>
 				)}
+				<div className='switch-container'>
+					<h2>Questions type</h2>
+					<div className='label-container'>
+						<label htmlFor='capital-btn' className='switch'>
+							<input type='checkbox' id='capital-btn' />
+							<span className='slider'></span>
+						</label>
+						<p>Capital Questions</p>
+					</div>
+					<div className='label-container'>
+						<label htmlFor='flag-btn' className='switch'>
+							<input type='checkbox' id='flag-btn' />
+							<span className='slider'></span>
+						</label>
+						<p>Flag Questions</p>
+					</div>
+				</div>
 			</div>
 			<Footer />
 		</div>
