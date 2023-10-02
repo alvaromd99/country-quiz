@@ -1,12 +1,7 @@
 import './App.css'
 import GlobeSvg from '../country-quiz-master/undraw_adventure_4hum 1.svg'
 import { useEffect, useState } from 'react'
-import {
-	Country,
-	QuestionType,
-	QuestionValues,
-	GlobalQuestionType,
-} from './types/types'
+import { Country, QuestionType, QuestionValues } from './types/types'
 import { fetchCountries, getRandomUniqueIndexes } from './services'
 import Question from './components/Question'
 import Footer from './components/Footer'
@@ -25,8 +20,7 @@ function App() {
 	})
 	const [isAnswerCorrect, setIsAnswerCorrect] = useState<boolean>(false)
 	const [questionType, setQuestionType] = useState<QuestionType>('capital')
-	const [globalQuestionType, setGlobalQuestionType] =
-		useState<GlobalQuestionType>(null)
+	const [correctCounter, setCorrectCounter] = useState<number>(0)
 
 	// Función para manejar la respuesta correcta
 	const handleAnswerCorrect = () => {
@@ -69,6 +63,7 @@ function App() {
 					values={questionValues}
 					setIsAnswerCorrect={handleAnswerCorrect}
 					questionType={questionType}
+					setCorrectCounter={setCorrectCounter}
 				/>
 
 				{isAnswerCorrect && (
@@ -105,6 +100,7 @@ function App() {
 					</div>
 				</div>
 			</div>
+			{correctCounter === 5 && <h3>Has ganado!!</h3>}
 			<Footer />
 		</div>
 	)

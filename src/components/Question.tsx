@@ -9,12 +9,14 @@ interface CapitalQuestionProps {
 	values: QuestionValues
 	setIsAnswerCorrect: (correct: boolean) => void
 	questionType: string
+	setCorrectCounter: (counter: number) => void
 }
 
 export default function Question({
 	values,
 	setIsAnswerCorrect,
 	questionType,
+	setCorrectCounter,
 }: CapitalQuestionProps) {
 	const { capital, flag, name, wrongAnswers } = values
 	const [shuffledArray, setShuffledArray] = useState<string[]>([])
@@ -31,6 +33,8 @@ export default function Question({
 
 		if (selectedAnswer === name) {
 			setIsAnswerCorrect(true)
+		} else {
+			setCorrectCounter(0)
 		}
 	}
 

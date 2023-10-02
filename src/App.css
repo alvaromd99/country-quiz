@@ -18,7 +18,7 @@
 .quiz-cont {
 	width: 460px;
 	min-height: 480px;
-	background-color: white;
+	background-color: var(--bg-color);
 	border-radius: 10px;
 	display: flex;
 	flex-direction: column;
@@ -53,6 +53,7 @@ h1 {
 	font-weight: bold;
 }
 
+/* Checkboxes */
 .switch-container {
 	top: 10px;
 	left: 10px;
@@ -73,7 +74,7 @@ h1 {
 .switch input[type='checkbox'] {
 	-webkit-appearance: none;
 	appearance: none;
-	background-color: #fff;
+	background-color: var(--bg-color);
 	margin: 0;
 }
 
