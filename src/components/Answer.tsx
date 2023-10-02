@@ -22,11 +22,9 @@ export default function Answer({
 	const btnClass = `question ${
 		isSelected ? (isCorrect ? 'correct' : 'incorrect') : ''
 	}`
+
 	return (
-		<button
-			key={index}
-			className={btnClass}
-			onClick={() => handleClick(option)}>
+		<button className={btnClass} onClick={() => handleClick(option)}>
 			<div className='btn-text'>
 				<p>{String.fromCharCode(65 + index)}</p>
 				<p>{option}</p>

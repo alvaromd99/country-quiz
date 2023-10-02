@@ -55,6 +55,7 @@ export default function Question({
 				{shuffledArray.map((option, index) => {
 					return (
 						<Answer
+							key={index}
 							option={option}
 							answer={answer}
 							name={name}
