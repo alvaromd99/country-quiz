@@ -1,6 +1,5 @@
 import './App.css'
 import GlobeSvg from '../country-quiz-master/undraw_adventure_4hum 1.svg'
-import WinSvg from '../country-quiz-master/undraw_winners_ao2o 2.svg'
 import { useEffect, useState } from 'react'
 import { Country, QuestionType, QuestionValues } from './types/types'
 import { fetchCountries, getRandomUniqueIndexes } from './services'
@@ -8,8 +7,7 @@ import Question from './components/Question'
 import Footer from './components/Footer'
 import Switch from './components/Switch'
 import NextBtn from './components/NextBtn'
-
-// TODO Add a correct answer counter
+import Winner from './components/Winner'
 
 function App() {
 	const [countries, setCountries] = useState<Country[]>([])
@@ -25,7 +23,6 @@ function App() {
 		wrongAnswers: [],
 	})
 
-	// Función para manejar la respuesta correcta
 	const handleAnswerCorrect = () => {
 		setIsAnswerCorrect(true)
 	}
@@ -74,6 +71,7 @@ function App() {
 				<img className='globe' src={GlobeSvg} alt='Person and globe svg' />
 			)}
 			<div className='quiz-cont'>
+				// Questions
 				{correctCounter < 3 && (
 					<Question
 						values={questionValues}
@@ -83,30 +81,13 @@ function App() {
 						setCorrectCounter={setCorrectCounter}
 					/>
 				)}
-				{correctCounter >= 3 && (
-					<div className='winner-page'>
-						<img
-							className='win-svg'
-							src={WinSvg}
-							alt='Two persons celebrating svg'
-						/>
-						<div className='info-results'>
-							<h2>Results</h2>
-							<p>
-								You got <span className='big-number'>{correctCounter}</span>{' '}
-								answers correct.
-							</p>
-						</div>
-						<NextBtn
-							text={'Try Again'}
-							btnClass={'again-btn'}
-							resetGame={resetGame}
-						/>
-					</div>
-				)}
-
-				{isAnswerCorrect && (
+				// Next btn on questions
+				{isAnswerCorrect && correctCounter < 3 && (
 					<NextBtn text={'Next'} btnClass={'next-btn'} resetGame={resetGame} />
+				)}
+				// Win
+				{correctCounter >= 3 && (
+					<Winner correctCounter={correctCounter} resetGame={resetGame} />
 				)}
 			</div>
 			<Switch />

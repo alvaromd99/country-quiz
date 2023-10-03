@@ -1,0 +1,32 @@
+.winner-page {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.winner-page .info-results {
+	color: var(--question-color);
+	text-align: center;
+}
+
+.winner-page .info-results h2 {
+	font-size: 36px;
+	font-weight: bold;
+}
+
+.again-btn {
+	width: 200px;
+	height: 60px;
+	background-color: var(--bg-color);
+	color: var(--win-letter-color);
+	border: 2px solid var(--win-letter-color);
+	border-radius: 8px;
+	font-weight: bold;
+}
+
+.again-btn:hover {
+	background-color: var(--win-letter-color);
+	color: var(--bg-color);
+}
