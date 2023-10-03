@@ -2,13 +2,14 @@ import './App.css'
 import GlobeSvg from '../country-quiz-master/undraw_adventure_4hum 1.svg'
 import { useEffect, useState } from 'react'
 import { Country, QuestionType, QuestionValues } from './types/types'
-import { fetchCountries, getRandomUniqueIndexes } from './utils'
+import { fetchCountries } from './utils'
 import Question from './components/Question'
 import Footer from './components/Footer'
 import Switch from './components/Switch'
 import NextBtn from './components/NextBtn'
 import Winner from './components/Winner'
-import { getValues } from './utils/getValues'
+import { getValues } from './utils/index'
+import { SCORE_TO_WIN_THE_GAME as winnerScore } from './constants'
 
 function App() {
 	const [countries, setCountries] = useState<Country[]>([])
@@ -16,7 +17,7 @@ function App() {
 	const [isNeedNewData, setIsNeedNewData] = useState<boolean>(false)
 	const [isAnswerCorrect, setIsAnswerCorrect] = useState<boolean>(false)
 	const [questionType, setQuestionType] = useState<QuestionType>('capital')
-	const [correctCounter, setCorrectCounter] = useState<number>(4)
+	const [correctCounter, setCorrectCounter] = useState<number>(0)
 	const [questionValues, setQuestionValues] = useState<QuestionValues>({
 		name: '',
 		capital: '',
@@ -52,7 +53,7 @@ function App() {
 		setIsNeedNewData(true)
 		setIsAnswerCorrect(false)
 
-		if (correctCounter >= 3) {
+		if (correctCounter >= winnerScore - 1) {
 			setCorrectCounter(0)
 		}
 	}
@@ -75,11 +76,11 @@ function App() {
 					/>
 				)}
 				// Next btn on questions
-				{isAnswerCorrect && correctCounter < 3 && (
+				{isAnswerCorrect && correctCounter < winnerScore - 1 && (
 					<NextBtn text={'Next'} btnClass={'next-btn'} resetGame={resetGame} />
 				)}
 				// Win
-				{correctCounter >= 3 && (
+				{correctCounter >= winnerScore - 1 && (
 					<Winner correctCounter={correctCounter} resetGame={resetGame} />
 				)}
 			</div>

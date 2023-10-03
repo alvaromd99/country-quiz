@@ -1,6 +1,6 @@
 import '../styles/Questions.css'
 import { QuestionValues } from '../types/types'
-import { reArrangeArray } from '../utils/shuffleArray'
+import { reArrangeArray } from '../utils/index'
 import { useEffect, useState } from 'react'
 import Answer from './Answer'
 
