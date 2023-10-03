@@ -7,6 +7,7 @@
 	--letter-color: #6066d0cc;
 	--win-letter-color: #1d355d;
 	--win-number-color: #6fcf97;
+	--switch-color: #cccccc;
 }
 
 .App {
@@ -25,12 +26,10 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding-top: 30px;
 }
 
 h1 {
 	padding-right: 200px;
-	margin-bottom: 10px;
 	font-size: 34px;
 	font-weight: bold;
 }
@@ -45,7 +44,7 @@ h1 {
 	width: 110px;
 	height: 54px;
 	position: relative;
-	top: 70px;
+	top: 50px;
 	left: 142px;
 	background-color: var(--letter-color);
 	color: var(--bg-color);
