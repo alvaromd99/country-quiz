@@ -17,7 +17,7 @@ function App() {
 	const [isNeedNewData, setIsNeedNewData] = useState<boolean>(false)
 	const [isAnswerCorrect, setIsAnswerCorrect] = useState<boolean>(false)
 	const [questionType, setQuestionType] = useState<QuestionType>('capital')
-	const [correctCounter, setCorrectCounter] = useState<number>(0)
+	const [correctCounter, setCorrectCounter] = useState<number>(1)
 	const [questionValues, setQuestionValues] = useState<QuestionValues>({
 		name: '',
 		capital: '',
@@ -53,7 +53,7 @@ function App() {
 		setIsNeedNewData(true)
 		setIsAnswerCorrect(false)
 
-		if (correctCounter >= winnerScore - 1) {
+		if (correctCounter >= winnerScore) {
 			setCorrectCounter(0)
 		}
 	}
@@ -66,7 +66,7 @@ function App() {
 			)}
 			<div className='quiz-cont'>
 				// Questions
-				{correctCounter < 3 && (
+				{correctCounter < winnerScore && (
 					<Question
 						values={questionValues}
 						setIsAnswerCorrect={handleAnswerCorrect}
@@ -76,11 +76,11 @@ function App() {
 					/>
 				)}
 				// Next btn on questions
-				{isAnswerCorrect && correctCounter < winnerScore - 1 && (
+				{isAnswerCorrect && correctCounter < winnerScore && (
 					<NextBtn text={'Next'} btnClass={'next-btn'} resetGame={resetGame} />
 				)}
 				// Win
-				{correctCounter >= winnerScore - 1 && (
+				{correctCounter >= winnerScore && (
 					<Winner correctCounter={correctCounter} resetGame={resetGame} />
 				)}
 			</div>
