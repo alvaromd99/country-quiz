@@ -2,12 +2,13 @@ import './App.css'
 import GlobeSvg from '../country-quiz-master/undraw_adventure_4hum 1.svg'
 import { useEffect, useState } from 'react'
 import { Country, QuestionType, QuestionValues } from './types/types'
-import { fetchCountries, getRandomUniqueIndexes } from './services'
+import { fetchCountries, getRandomUniqueIndexes } from './utils'
 import Question from './components/Question'
 import Footer from './components/Footer'
 import Switch from './components/Switch'
 import NextBtn from './components/NextBtn'
 import Winner from './components/Winner'
+import { getValues } from './utils/getValues'
 
 function App() {
 	const [countries, setCountries] = useState<Country[]>([])
@@ -40,25 +41,17 @@ function App() {
 
 	useEffect(() => {
 		if (countries.length > 0) {
-			const randomIndexes = getRandomUniqueIndexes(4, countries.length)
-			const randomCountries = randomIndexes.map((index) => countries[index])
-			const [correctAnswer, ...wrongAnswers] = randomCountries
-
-			setQuestionValues({
-				name: correctAnswer.name.common,
-				capital: correctAnswer.capital[0],
-				flag: correctAnswer.flag,
-				wrongAnswers: wrongAnswers.map((country) => country.name.common),
-			})
+			getValues({ countries, setQuestionValues })
 		}
 		setIsNeedNewData(false)
 	}, [countries, isNeedNewData])
 
 	const resetGame = () => {
+		const newQuestionType = questionType === 'capital' ? 'flag' : 'capital'
+		setQuestionType(newQuestionType)
 		setIsNeedNewData(true)
 		setIsAnswerCorrect(false)
-		if (questionType === 'capital') setQuestionType('flag')
-		if (questionType === 'flag') setQuestionType('capital')
+
 		if (correctCounter >= 3) {
 			setCorrectCounter(0)
 		}
