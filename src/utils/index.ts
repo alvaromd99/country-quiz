@@ -35,8 +35,6 @@ export const reArrangeArray = (array: string[]) => {
 	// Utiliza la función de comparación para ordenar el array aleatoriamente
 	const shuffledArray = [...array].sort(randomComparator)
 
-	console.log('Shuffle')
-
 	return shuffledArray
 }
 

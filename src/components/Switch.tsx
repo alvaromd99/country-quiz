@@ -9,8 +9,13 @@ interface SwitchProps {
 export default function Switch({ switchValues, setSwitchValues }: SwitchProps) {
 	const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, checked } = event.target
+
 		const updatedSwitchValues = { ...switchValues, [name]: checked }
 
+		// If both are unchecked doesn`t let you do it
+		if (!updatedSwitchValues.capital && !updatedSwitchValues.flag) {
+			return
+		}
 		setSwitchValues(updatedSwitchValues)
 	}
 

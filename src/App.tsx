@@ -16,8 +16,6 @@ import Winner from './components/Winner'
 import { getValues } from './utils/index'
 import { SCORE_TO_WIN_THE_GAME as winnerScore } from './constants'
 
-// TODO Make switch available
-
 function App() {
 	const [countries, setCountries] = useState<Country[]>([])
 	const [isNeedNewData, setIsNeedNewData] = useState<boolean>(false)
@@ -42,7 +40,6 @@ function App() {
 	useEffect(() => {
 		fetchCountries()
 			.then((data) => {
-				console.log('Fetching.......................')
 				setCountries(data)
 			})
 			.catch((err) => console.error('Something went wrong -> ' + err))
@@ -55,8 +52,18 @@ function App() {
 		setIsNeedNewData(false)
 	}, [countries, isNeedNewData])
 
+	console.log('Q type -> ' + questionType)
+
 	const resetGame = () => {
-		const newQuestionType = questionType === 'capital' ? 'flag' : 'capital'
+		const newQuestionType = () => {
+			if (!switchValues.capital) {
+				return 'flag'
+			} else if (!switchValues.flag) {
+				return 'capital'
+			} else {
+				return questionType === 'capital' ? 'flag' : 'capital'
+			}
+		}
 		setQuestionType(newQuestionType)
 		setIsNeedNewData(true)
 		setIsAnswerCorrect(false)
