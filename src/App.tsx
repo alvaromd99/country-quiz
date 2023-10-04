@@ -11,9 +11,10 @@ import Winner from './components/Winner'
 import { getValues } from './utils/index'
 import { SCORE_TO_WIN_THE_GAME as winnerScore } from './constants'
 
+// TODO Make switch available
+
 function App() {
 	const [countries, setCountries] = useState<Country[]>([])
-	const [isDataFetched, setIsDataFetched] = useState<boolean>(false)
 	const [isNeedNewData, setIsNeedNewData] = useState<boolean>(false)
 	const [isAnswerCorrect, setIsAnswerCorrect] = useState<boolean>(false)
 	const [questionType, setQuestionType] = useState<QuestionType>('capital')
@@ -30,15 +31,13 @@ function App() {
 	}
 
 	useEffect(() => {
-		if (!isDataFetched) {
-			fetchCountries()
-				.then((data) => {
-					setCountries(data)
-					setIsDataFetched(true)
-				})
-				.catch((err) => console.error('Something went wrong -> ' + err))
-		}
-	}, [isDataFetched])
+		fetchCountries()
+			.then((data) => {
+				console.log('Fetching.......................')
+				setCountries(data)
+			})
+			.catch((err) => console.error('Something went wrong -> ' + err))
+	}, [])
 
 	useEffect(() => {
 		if (countries.length > 0) {
@@ -61,7 +60,7 @@ function App() {
 	return (
 		<div className='App'>
 			<h1>COUNTRY QUIZ</h1>
-			{correctCounter < 3 && (
+			{correctCounter < winnerScore && (
 				<img className='globe' src={GlobeSvg} alt='Person and globe svg' />
 			)}
 			<div className='quiz-cont'>
