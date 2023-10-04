@@ -52,8 +52,6 @@ function App() {
 		setIsNeedNewData(false)
 	}, [countries, isNeedNewData])
 
-	console.log('Q type -> ' + questionType)
-
 	const resetGame = () => {
 		const newQuestionType = () => {
 			if (!switchValues.capital) {

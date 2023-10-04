@@ -4,9 +4,18 @@
 	left: 10px;
 	position: absolute;
 	padding: 10px;
-	border-radius: 10px;
+	border-radius: 5px;
 	background-color: var(--bg-color);
 	color: var(--letter-color);
+}
+
+.menu-icon {
+	background-color: var(--bg-color);
+	border: none;
+	position: absolute;
+	top: 10px;
+	left: 226px;
+	border-radius: 5px;
 }
 
 .switch-container .label-container {
