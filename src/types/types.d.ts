@@ -25,3 +25,8 @@ export interface QuestionValues {
 export type QuestionType = 'capital' | 'flag'
 
 export type GlobalQuestionType = 'capital' | 'flag' | null
+
+export interface SwitchValues {
+	capital: boolean
+	flag: boolean
+}

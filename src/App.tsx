@@ -1,7 +1,12 @@
 import './App.css'
 import GlobeSvg from '../country-quiz-master/undraw_adventure_4hum 1.svg'
 import { useEffect, useState } from 'react'
-import { Country, QuestionType, QuestionValues } from './types/types'
+import {
+	Country,
+	QuestionType,
+	QuestionValues,
+	SwitchValues,
+} from './types/types'
 import { fetchCountries } from './utils'
 import Question from './components/Question'
 import Footer from './components/Footer'
@@ -24,6 +29,10 @@ function App() {
 		capital: '',
 		flag: '',
 		wrongAnswers: [],
+	})
+	const [switchValues, setSwitchValues] = useState<SwitchValues>({
+		capital: true,
+		flag: true,
 	})
 
 	const handleAnswerCorrect = () => {
@@ -83,7 +92,7 @@ function App() {
 					<Winner correctCounter={correctCounter} resetGame={resetGame} />
 				)}
 			</div>
-			<Switch />
+			<Switch switchValues={switchValues} setSwitchValues={setSwitchValues} />
 			<Footer />
 		</div>
 	)
