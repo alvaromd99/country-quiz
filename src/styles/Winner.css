@@ -16,6 +16,12 @@
 	font-weight: bold;
 }
 
+.winner-page .info-results .big-number {
+	font-size: 36px;
+	font-weight: bold;
+	color: var(--win-number-color);
+}
+
 .again-btn {
 	width: 200px;
 	height: 60px;
